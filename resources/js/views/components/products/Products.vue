@@ -64,7 +64,7 @@
                                 </div>
                             </td>
                             <td class="price-column">
-                                ${{ parseFloat(product.price).toFixed(2) }}
+                                Tk{{ parseFloat(product.price).toFixed(2) }}
                             </td>
                             <td class="status-column">
                                 <span :class="['status-badge', product.status ? 'active' : 'inactive']">
