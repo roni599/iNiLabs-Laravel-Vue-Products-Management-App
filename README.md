@@ -84,3 +84,8 @@ iNiLabs-Laravel-Vue-Products/
 
 - Make sure your backend database is properly configured in the `.env` file.
 - This project uses Laravel 12 and Vue 3.
+
+## Author
+-Ebrahim khalil
+-ebrahimkhalil.dev@gmail.com
+-01760-109383
