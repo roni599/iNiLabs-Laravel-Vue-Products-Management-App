@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
+
     public function register(Request $request)
     {
         $request->validate([
@@ -30,6 +32,7 @@ class AuthController extends Controller
         ], 201);
     }
 
+
     public function login(Request $request)
     {
         $request->validate(['email' => 'required|email', 'password' => 'required']);
@@ -45,5 +48,24 @@ class AuthController extends Controller
     {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Logged out']);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|exists:users,email',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found.'], 404);
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return response()->json(['message' => 'Password has been reset successfully.']);
     }
 }

@@ -197,22 +197,23 @@ const handleLogin = async () => {
 };
 
 const handleForgotPassword = () => {
-    if (!email.value.trim()) {
-        error.value = 'Please enter your email address to reset password';
-        return;
-    }
+    // if (!email.value.trim()) {
+    //     error.value = 'Please enter your email address to reset password';
+    //     return;
+    // }
 
-    if (!isValidEmail(email.value)) {
-        error.value = 'Please enter a valid email address';
-        return;
-    }
+    // if (!isValidEmail(email.value)) {
+    //     error.value = 'Please enter a valid email address';
+    //     return;
+    // }
 
-    successMessage.value = `Password reset instructions sent to ${email.value}`;
-    error.value = '';
+    // successMessage.value = `Password reset instructions sent to ${email.value}`;
+    // error.value = '';
 
-    setTimeout(() => {
-        successMessage.value = '';
-    }, 3000);
+    // setTimeout(() => {
+    //     successMessage.value = '';
+    // }, 3000);
+    router.push('/forget');
 };
 
 const socialLogin = (provider) => {
@@ -226,7 +227,7 @@ const socialLogin = (provider) => {
 };
 
 const goToSignup = () => {
-    router.push('/register');
+    router.push('/signup');
 };
 
 onMounted(() => {
