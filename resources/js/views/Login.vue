@@ -1,8 +1,6 @@
-<!-- resources/js/components/LoginComponent.vue -->
 <template>
     <div class="login-wrapper">
         <div class="login-container">
-            <!-- Left side with welcome message -->
             <div class="login-left">
                 <h2>Welcome Back!</h2>
                 <p>Sign in to access your account and explore our exclusive products.</p>
@@ -23,10 +21,8 @@
                 </div>
             </div>
 
-            <!-- Right side with login form -->
             <div class="login-right">
                 <div class="logo">
-                    <!-- <i class="fas fa-cube"></i> -->
                     <img :src="logo" alt="Logo" class="my-logo">
                     <span>iNiLabs</span>
                 </div>
@@ -36,19 +32,16 @@
                     <p>Enter your credentials to access your account</p>
                 </div>
 
-                <!-- Success message display -->
                 <div class="success-message" v-if="successMessage">
                     <i class="fas fa-check-circle"></i>
                     <span>{{ successMessage }}</span>
                 </div>
 
-                <!-- Error message display -->
                 <div class="error-message" v-if="error">
                     <i class="fas fa-exclamation-circle"></i>
                     <span>{{ error }}</span>
                 </div>
 
-                <!-- Login form -->
                 <div class="input-group">
                     <label for="email">Email Address</label>
                     <div class="input-wrapper">
@@ -117,7 +110,7 @@ import { useRouter } from 'vue-router';
 import axios from 'axios';
 import logo from '@/assets/logo/inilabsn_logo.jpg';
 
-// Reactive state
+
 const email = ref('');
 const password = ref('');
 const rememberMe = ref(false);
@@ -127,24 +120,20 @@ const successMessage = ref('');
 const showPassword = ref(false);
 const router = useRouter();
 
-// Form errors
 const formErrors = reactive({
     email: '',
     password: ''
 });
 
-// Computed properties
 const emailError = computed(() => formErrors.email);
 const passwordError = computed(() => formErrors.password);
 
-// Form validation
 const validateForm = () => {
     formErrors.email = '';
     formErrors.password = '';
 
     let isValid = true;
 
-    // Email validation
     if (!email.value.trim()) {
         formErrors.email = 'Email is required';
         isValid = false;
@@ -153,7 +142,6 @@ const validateForm = () => {
         isValid = false;
     }
 
-    // Password validation
     if (!password.value) {
         formErrors.password = 'Password is required';
         isValid = false;
@@ -170,7 +158,6 @@ const isValidEmail = (email) => {
     return re.test(email);
 };
 
-// Login handler
 const handleLogin = async () => {
     error.value = '';
     successMessage.value = '';
@@ -182,15 +169,12 @@ const handleLogin = async () => {
     loading.value = true;
 
     try {
-        // Make API call to Laravel backend
         const response = await axios.post('/api/login', {
             email: email.value,
             password: password.value
         });
-
-        // Store token
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem('user', JSON.stringify(response.data.user.name));
 
         if (rememberMe.value) {
             localStorage.setItem('rememberMe', 'true');
@@ -201,8 +185,6 @@ const handleLogin = async () => {
         }
 
         successMessage.value = 'Login successful! Redirecting...';
-
-        // Redirect to products page after successful login
         setTimeout(() => {
             router.push('/products');
         }, 1500);
@@ -247,7 +229,6 @@ const goToSignup = () => {
     router.push('/register');
 };
 
-// Lifecycle hook
 onMounted(() => {
     if (localStorage.getItem('rememberMe') === 'true') {
         rememberMe.value = true;

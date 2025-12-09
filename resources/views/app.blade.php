@@ -11,7 +11,6 @@
 
 <body>
     <div id="app">
-        <products-component></products-component>
     </div>
 </body>
 
