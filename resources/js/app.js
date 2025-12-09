@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
+
 // ✅ Create an Axios instance with baseURL and withCredentials
 const axiosInstance = axios.create({
     baseURL: 'http://127.0.0.1:8000', // Laravel backend URL

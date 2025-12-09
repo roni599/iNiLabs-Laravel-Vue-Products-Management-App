@@ -299,7 +299,8 @@
                                 </div>
                                 <div class="detail-item">
                                     <strong>Price:</strong>
-                                    <span class="price-view">Tk.{{ parseFloat(viewProductData.price).toFixed(2) }}</span>
+                                    <span class="price-view">Tk.{{ parseFloat(viewProductData.price).toFixed(2)
+                                        }}</span>
                                 </div>
                                 <div class="detail-item">
                                     <strong>Status:</strong>
@@ -660,7 +661,7 @@ export default {
                     this.viewError = 'Failed to load product details. Please try again.';
                 }
             } finally {
-              
+
             }
         },
         closeViewModal() {
